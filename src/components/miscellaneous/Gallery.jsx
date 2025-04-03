@@ -53,8 +53,8 @@ function Rig({
   q = new THREE.Quaternion(),
   p = new THREE.Vector3(),
   ...props
-}: any) {
-  const ref = useRef<any>();
+}) {
+  const ref = useRef();
   const scroll = useScroll();
   const clicked = useRef();
   const [_, params] = useRoute('/item/:id');
@@ -185,7 +185,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
       image.current.scale,
       [
         0.85 * (!isActive && hovered ? 0.85 : 1),
-        0.9 * (!isActive && hovered ? 0.905 : 1),
+        0.9 * (!isActive && hovered ? 0.905 : isActive ? 0.5 : 1),
         1,
       ],
       0.1,
@@ -193,7 +193,7 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
     );
     easing.dampC(
       frame.current.material.color,
-      hovered ? 'orange' : 'white',
+      hovered && !isActive ? 'orange' : 'white',
       0.1,
       dt
     );

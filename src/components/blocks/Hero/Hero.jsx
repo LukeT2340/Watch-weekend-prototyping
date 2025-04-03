@@ -1,6 +1,6 @@
 import Gallery from '../../miscellaneous/Gallery';
 
-const Hero: React.FC = () => (
+const Hero = () => (
   <section className="hero h-screen">
     <Gallery />
   </section>
