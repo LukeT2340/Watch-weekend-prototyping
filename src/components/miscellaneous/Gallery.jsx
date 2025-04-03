@@ -29,7 +29,7 @@ const Gallery = () => (
       <Rig rotation={[Math.PI / 20, 0, 0]}>
         <Carousel />
         <mesh rotation={[-Math.PI / 2, 0, 0]}>
-          <planeGeometry args={[50, 50]} />
+          <planeGeometry args={[20, 20]} />
           <MeshReflectorMaterial
             blur={[300, 100]}
             resolution={2048}
@@ -107,7 +107,7 @@ function Rig({
 function Carousel({ radius = 3.7, count = 20 }) {
   return (
     <>
-      <Center rotation={[-(Math.PI * 1) / 7, 0, 0]} position={[0, 1, 0]}>
+      <Center rotation={[-(Math.PI * 1) / 7, 0, 0]} position={[1, 1, 0]}>
         <Text3D
           curveSegments={32}
           bevelEnabled
@@ -115,7 +115,7 @@ function Carousel({ radius = 3.7, count = 20 }) {
           bevelThickness={0.1}
           height={0.5}
           lineHeight={0.6}
-          size={0.8}
+          size={0.5}
           font="/assets/fonts/Inter_Bold.json"
         >
           {`Watch\nWeekend`}
@@ -125,9 +125,7 @@ function Carousel({ radius = 3.7, count = 20 }) {
             roughness={0.2}
           />
         </Text3D>
-        <Center position={[-0.7, 0, 0]}>
-          <Watch />
-        </Center>
+        <Watch />
       </Center>
       {Array.from({ length: count }, (_, i) => (
         <Frame
@@ -155,15 +153,16 @@ function Watch() {
   const { gl } = useThree();
 
   return (
-    <>
+    <Center position={[-0.9, 0.4, 0]}>
       <Gltf
         src={'/assets/images/seiko_watch.glb'}
         extendLoader={(loader) => {
           loader.setKTX2Loader(ktx2Loader.detectSupport(gl));
         }}
-        scale={20}
+        scale={15}
+        rotation={[0, 0, -Math.PI / 9]}
       />
-    </>
+    </Center>
   );
 }
 
