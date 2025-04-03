@@ -40,6 +40,7 @@ const Gallery = () => (
             maxDepthThreshold={1.4}
             color="#050505"
             metalness={0.5}
+            mirror={0.5}
           />
         </mesh>
       </Rig>
@@ -226,11 +227,6 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
         >
           <boxGeometry />
           <meshBasicMaterial toneMapped={false} fog={false} />
-          {isActive && (
-            <Html>
-              <h1>I'm Active</h1>
-            </Html>
-          )}
         </mesh>
         <Image
           raycast={() => null}
@@ -239,6 +235,19 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
           url={url}
         />
       </mesh>
+      {isActive && (
+        <Text
+          maxWidth={0.1}
+          anchorX="left"
+          anchorY="top"
+          position={[0.4, GOLDENRATIO * 0.9, -0.1]}
+          fontSize={0.025}
+          rotation={[0, Math.PI, 0]}
+          color={'#000'}
+        >
+          {name.split('-').join(' ')}
+        </Text>
+      )}
     </group>
   );
 }
