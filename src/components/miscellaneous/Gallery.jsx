@@ -8,12 +8,10 @@ import {
   useScroll,
   Text,
   Center,
-  SpotLight,
   Text3D,
   Gltf,
   useCursor,
   MeshReflectorMaterial,
-  Html,
 } from '@react-three/drei';
 import { easing } from 'maath';
 import { KTX2Loader } from 'three-stdlib';
@@ -46,7 +44,7 @@ const Gallery = () => (
         </mesh>
       </Rig>
     </ScrollControls>
-    <Environment preset="forest" background blur={0.5} />
+    <Environment preset="forest" background blur={1} />
   </Canvas>
 );
 
@@ -111,7 +109,7 @@ function Carousel({ radius = 3.7, count = 20 }) {
         <Text3D
           curveSegments={32}
           bevelEnabled
-          bevelSize={0.04}
+          bevelSize={0.01}
           bevelThickness={0.1}
           height={0.5}
           lineHeight={0.6}
