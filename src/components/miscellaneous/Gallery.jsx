@@ -90,12 +90,14 @@ function Rig({
   return (
     <group
       ref={ref}
-      onClick={(e) => (
-        e.stopPropagation(),
-        setLocation(
-          clicked.current === e.object ? '/' : '/item/' + e.object.name
-        )
-      )}
+      onClick={(e) => {
+        e.stopPropagation();
+        if (clicked.current && clicked.current === e.object) {
+          setLocation('/item/' + e.object.name);
+        } else {
+          setLocation('/');
+        }
+      }}
       onPointerMissed={() => setLocation('/')}
       {...props}
     />
