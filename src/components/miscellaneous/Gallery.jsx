@@ -8,6 +8,7 @@ import {
   useScroll,
   Text,
   Center,
+  SpotLight,
   Text3D,
   Gltf,
   useCursor,
@@ -23,7 +24,7 @@ import '../../js/utilities';
 const GOLDENRATIO = 1.61803398875;
 
 const Gallery = () => (
-  <Canvas camera={{ position: [0, 0, 90], fov: 30 }}>
+  <Canvas camera={{ position: [0, 3, 10], fov: 30 }}>
     <ScrollControls pages={4} infinite>
       <Rig rotation={[Math.PI / 20, 0, 0]}>
         <Carousel />
@@ -45,7 +46,7 @@ const Gallery = () => (
         </mesh>
       </Rig>
     </ScrollControls>
-    <Environment preset="city" background blur={0.5} />
+    <Environment preset="forest" background blur={0.5} />
   </Canvas>
 );
 
@@ -63,10 +64,8 @@ function Rig({
     clicked.current = ref.current.getObjectByName(params?.id);
     if (clicked.current) {
       clicked.current.parent.updateWorldMatrix(true, true);
-      // Change the position to be on the opposite side
-      clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, -3.5)); // Changed z from 1.25 to -1.25
+      clicked.current.parent.localToWorld(p.set(0, GOLDENRATIO / 2, -3.5));
       clicked.current.parent.getWorldQuaternion(q);
-      // Rotate the quaternion 180 degrees around the Y axis to face the back
       q.multiply(
         new THREE.Quaternion().setFromAxisAngle(
           new THREE.Vector3(0, 1, 0),
@@ -81,10 +80,10 @@ function Rig({
   useFrame((state, delta) => {
     if (!ref.current || !state.events.update) return;
     if (location === '/') {
-      easing.damp3(state.camera.position, [0, 3, 10], 0.3, delta); // Move camera
-      state.camera.lookAt(0, 0, 0); // Look at center
-      ref.current.rotation.y = -scroll.offset * (Math.PI * 2); // Rotate contents
-      state.events.update(); // Raycasts every frame rather than on pointer-move
+      easing.damp3(state.camera.position, [0, 3, 10], 0.6, delta);
+      state.camera.lookAt(0, 0, 0);
+      ref.current.rotation.y = -scroll.offset * (Math.PI * 2);
+      state.events.update();
     } else {
       easing.damp3(state.camera.position, p, 0.4, delta);
       easing.dampQ(state.camera.quaternion, q, 0.4, delta);
