@@ -116,7 +116,7 @@ function Carousel({ radius = 3.7, count = 20 }) {
           height={0.5}
           lineHeight={0.6}
           size={0.8}
-          font="/src/assets/fonts/Inter_Bold.json"
+          font="/assets/fonts/Inter_Bold.json"
         >
           {`Watch\nWeekend`}
           <meshStandardMaterial
@@ -132,7 +132,7 @@ function Carousel({ radius = 3.7, count = 20 }) {
       {Array.from({ length: count }, (_, i) => (
         <Frame
           key={i}
-          url={`/src/assets/images/common/img${Math.floor(i % 20) + 1}_.jpg`}
+          url={`/assets/images/common/img${Math.floor(i % 20) + 1}_.jpg`}
           position={[
             Math.sin((i / count) * Math.PI * 2) * radius,
             0,
@@ -157,7 +157,7 @@ function Watch() {
   return (
     <>
       <Gltf
-        src={'/src/assets/images/seiko_watch.glb'}
+        src={'/assets/images/seiko_watch.glb'}
         extendLoader={(loader) => {
           loader.setKTX2Loader(ktx2Loader.detectSupport(gl));
         }}
