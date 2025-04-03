@@ -14,6 +14,7 @@ export type LocomotiveScrollProps = {
   locoScrollRef: RefObject<HTMLElement>;
   children: React.ReactNode;
   el?: HTMLElement;
+  className?: string;
 };
 
 export interface IExtendedLocomotiveScrollOptions

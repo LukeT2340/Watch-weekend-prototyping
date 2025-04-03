@@ -9,6 +9,7 @@ import useMobile from '../../hooks/useMobile';
 const LocomotiveParallax: React.FC<LocomotiveScrollProps> = ({
   locoScrollRef,
   children,
+  className,
 }) => {
   const divRef = locoScrollRef as React.RefObject<HTMLDivElement>;
   const isMobile = useMobile();
@@ -29,7 +30,11 @@ const LocomotiveParallax: React.FC<LocomotiveScrollProps> = ({
     }
   }, [divRef]);
 
-  return <div ref={divRef}>{children}</div>;
+  return (
+    <div ref={divRef} className={className}>
+      {children}
+    </div>
+  );
 };
 
 export default LocomotiveParallax;
