@@ -4,7 +4,7 @@ const App = () => {
   return (
     <div>
       <main>
-        <article>
+        <article className="h-[calc(80vh-44px)]">
           <Hero />
         </article>
       </main>
