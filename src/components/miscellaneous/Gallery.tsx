@@ -119,7 +119,11 @@ function Carousel({ radius = 3.7, count = 20 }) {
           font="/src/assets/fonts/Inter_Bold.json"
         >
           {`Watch\nWeekend`}
-          <meshNormalMaterial />
+          <meshStandardMaterial
+            color="#ffffff"
+            metalness={0.5}
+            roughness={0.2}
+          />
         </Text3D>
         <Center position={[-0.7, 0, 0]}>
           <Watch />
@@ -128,7 +132,7 @@ function Carousel({ radius = 3.7, count = 20 }) {
       {Array.from({ length: count }, (_, i) => (
         <Frame
           key={i}
-          url={`/src/assets/images/common/img${Math.floor(i % 10) + 1}_.jpg`}
+          url={`/src/assets/images/common/img${Math.floor(i % 20) + 1}_.jpg`}
           position={[
             Math.sin((i / count) * Math.PI * 2) * radius,
             0,
@@ -140,43 +144,6 @@ function Carousel({ radius = 3.7, count = 20 }) {
       ;
     </>
   );
-
-  // return (
-  //   <>
-  //     <Center rotation={[-(Math.PI * 1) / 7, 0, 0]} position={[0, 0, 0]}>
-  //       <Text3D
-  //         curveSegments={32}
-  //         bevelEnabled
-  //         bevelSize={0.04}
-  //         bevelThickness={0.1}
-  //         height={0.5}
-  //         lineHeight={0.6}
-  //         letterSpacing={-0.06}
-  //         size={0.8}
-  //         font="/src/assets/fonts/Inter_Bold.json"
-  //       >
-  //         {`Watch\nWeekend`}
-  //         <meshNormalMaterial />
-  //       </Text3D>
-  //       <Center position={[-0.7, 0, 0]}>
-  //         <Watch />
-  //       </Center>
-  //     </Center>
-  //     {Array.from({ length: count }, (_, i) => (
-  //       <Card
-  //         key={i}
-  //         url={`/src/assets/images/common/img${Math.floor(i % 10) + 1}_.jpg`}
-  //         position={[
-  //           Math.sin((i / count) * Math.PI * 2) * radius,
-  //           0,
-  //           Math.cos((i / count) * Math.PI * 2) * radius,
-  //         ]}
-  //         rotation={[0, Math.PI + (i / count) * Math.PI * 2, 0]}
-  //       />
-  //     ))}
-  //     ;
-  //   </>
-  // );
 }
 
 const ktx2Loader = new KTX2Loader();
@@ -259,6 +226,11 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
         >
           <boxGeometry />
           <meshBasicMaterial toneMapped={false} fog={false} />
+          {isActive && (
+            <Html>
+              <h1>I'm Active</h1>
+            </Html>
+          )}
         </mesh>
         <Image
           raycast={() => null}
@@ -267,11 +239,6 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
           url={url}
         />
       </mesh>
-      {/* {isActive && (
-        <Html>
-          <h1>I'm Active</h1>
-        </Html>
-      )} */}
     </group>
   );
 }
