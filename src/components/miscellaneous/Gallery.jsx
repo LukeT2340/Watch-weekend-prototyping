@@ -107,7 +107,7 @@ function Rig({
 function Carousel({ radius = 3.7, count = 20 }) {
   return (
     <>
-      <Center rotation={[-(Math.PI * 1) / 7, 0, 0]} position={[1, 1, 0]}>
+      <Center rotation={[-(Math.PI * 1) / 7, 0, 0]} position={[0, 1, 0]}>
         <Text3D
           curveSegments={32}
           bevelEnabled
@@ -153,7 +153,7 @@ function Watch() {
   const { gl } = useThree();
 
   return (
-    <Center position={[-0.9, 0.4, 0]}>
+    <Center position={[-0.9, 0.1, 0]}>
       <Gltf
         src={'/assets/images/seiko_watch.glb'}
         extendLoader={(loader) => {
