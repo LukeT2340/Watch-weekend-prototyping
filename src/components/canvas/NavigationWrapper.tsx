@@ -48,19 +48,19 @@ function NavigationWrapper({
     easing.damp3(
       state.camera.position,
       location === '/' ? [0, 3, 10] : p,
-      0.8,
+      0.5,
       delta
     );
 
     if (location === '/')
       easing.damp3(
         state.camera.rotation as unknown as THREE.Vector3,
-        [-Math.PI / 5, 0, 0],
-        1,
+        [-Math.PI / 6, 0, 0],
+        0.5,
         delta
       );
 
-    easing.dampQ(state.camera.quaternion, q, 0.8, delta);
+    easing.dampQ(state.camera.quaternion, q, 0.7, delta);
   });
   return (
     <group
