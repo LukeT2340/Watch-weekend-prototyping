@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { useRef, useState } from 'react';
 import { RootState, useFrame } from '@react-three/fiber';
-import { Html, Image, Text, useCursor } from '@react-three/drei';
+import { Image, Text, useCursor } from '@react-three/drei';
 import { easing } from 'maath';
 import { useRoute, useLocation } from 'wouter';
 import getUuid from 'uuid-by-string';
@@ -95,6 +95,8 @@ const Frame: React.FC<Props> = ({ url, c = new THREE.Color(), ...props }) => {
             fontSize={0.025}
             rotation={[0, Math.PI, 0]}
             color={'#000'}
+            strokeColor={'pink'}
+            strokeWidth={2}
           >
             {name.split('-').join(' ')}
           </Text>
