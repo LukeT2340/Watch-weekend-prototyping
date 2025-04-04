@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import Gallery from '../../miscellaneous/Gallery';
+import WatchGallery from '../../canvas/WatchGallery';
 
 const Hero = () => (
   <section className="hero relative h-screen">
-    <Gallery />
+    <WatchGallery />
     <motion.div
       className="fixed top-0 left-0 h-screen w-[50vw] bg-black"
       initial={{ scaleX: 1 }}
