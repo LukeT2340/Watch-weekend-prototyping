@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { useRef, useState } from 'react';
 import { RootState, useFrame } from '@react-three/fiber';
-import { Image, Text, useCursor } from '@react-three/drei';
+import { Html, Image, Text, useCursor } from '@react-three/drei';
 import { easing } from 'maath';
 import { useRoute, useLocation } from 'wouter';
 import getUuid from 'uuid-by-string';
@@ -86,17 +86,34 @@ const Frame: React.FC<Props> = ({ url, c = new THREE.Color(), ...props }) => {
         />
       </mesh>
       {isActive && (
-        <Text
-          maxWidth={0.1}
-          anchorX="left"
-          anchorY="top"
-          position={[0.4, GOLDENRATIO * 0.9, -0.1]}
-          fontSize={0.025}
-          rotation={[0, Math.PI, 0]}
-          color={'#000'}
-        >
-          {name.split('-').join(' ')}
-        </Text>
+        <>
+          <Text
+            maxWidth={0.1}
+            anchorX="left"
+            anchorY="top"
+            position={[0.4, GOLDENRATIO * 0.9, -0.1]}
+            fontSize={0.025}
+            rotation={[0, Math.PI, 0]}
+            color={'#000'}
+          >
+            {name.split('-').join(' ')}
+          </Text>
+          <Text
+            maxWidth={0.1}
+            anchorX="left"
+            anchorY="top"
+            position={[0.1, GOLDENRATIO * 0.2, -0.1]}
+            fontSize={0.025}
+            rotation={[0, Math.PI, 0]}
+            color={'#000'}
+            onClick={(e) => {
+              e.stopPropagation();
+              window.open('https://www.google.com', '_blank');
+            }}
+          >
+            {'Google.com'}
+          </Text>
+        </>
       )}
     </group>
   );
