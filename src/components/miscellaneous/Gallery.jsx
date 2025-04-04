@@ -22,11 +22,11 @@ import '../../js/utilities';
 const GOLDENRATIO = 1.61803398875;
 
 const Gallery = () => (
-  <Canvas camera={{ position: [0, 3, 10], fov: 30 }}>
+  <Canvas camera={{ position: [0, 1, 5], fov: 30 }}>
     <ScrollControls pages={4} infinite>
       <Rig rotation={[Math.PI / 20, 0, 0]}>
         <Carousel />
-        <mesh rotation={[-Math.PI / 2, 0, 0]}>
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
           <planeGeometry args={[20, 20]} />
           <MeshReflectorMaterial
             blur={[300, 100]}
@@ -76,16 +76,20 @@ function Rig({
     }
   });
   useFrame((state, delta) => {
-    if (!ref.current || !state.events.update) return;
-    if (location === '/') {
-      easing.damp3(state.camera.position, [0, 3, 10], 0.6, delta);
-      state.camera.lookAt(0, 0, 0);
-      ref.current.rotation.y = -scroll.offset * (Math.PI * 2);
-      state.events.update();
-    } else {
-      easing.damp3(state.camera.position, p, 0.4, delta);
-      easing.dampQ(state.camera.quaternion, q, 0.4, delta);
-    }
+    if (!ref.current) return;
+    ref.current.rotation.y = -scroll.offset * (Math.PI * 2);
+
+    easing.damp3(
+      state.camera.position,
+      location === '/' ? [0, 3, 10] : p,
+      0.8,
+      delta
+    );
+
+    if (location === '/')
+      easing.damp3(state.camera.rotation, [-Math.PI / 6, 0, 0], 1, delta);
+
+    easing.dampQ(state.camera.quaternion, q, 0.8, delta);
   });
   return (
     <group
