@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { useRef, useState } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { RootState, useFrame } from '@react-three/fiber';
 import { Image, Text, useCursor } from '@react-three/drei';
 import { easing } from 'maath';
 import { useRoute, useLocation } from 'wouter';
@@ -9,19 +9,27 @@ import '../../js/utilities';
 
 const GOLDENRATIO = 1.61803398875;
 
-function Frame({ url, c = new THREE.Color(), ...props }) {
-  const image = useRef();
-  const frame = useRef();
+interface Props {
+  url: string;
+  c: THREE.Color;
+}
+
+const Frame: React.FC<Props> = ({ url, c = new THREE.Color(), ...props }) => {
+  const image = useRef<THREE.Mesh>(null!);
+  const frame = useRef<THREE.Mesh>(null!);
   const [, params] = useRoute('/item/:id');
   const [hovered, hover] = useState(false);
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
   const [rnd] = useState(() => Math.random());
   const name = getUuid(url);
   const isActive = params?.id === name;
   useCursor(hovered);
-  useFrame((state, dt) => {
-    image.current.material.zoom =
+  useFrame((state: RootState, dt: number) => {
+    if (!image.current) return;
+
+    (image.current.material as any).zoom =
       2 + Math.sin(rnd * 10000 + state.clock.elapsedTime / 3) / 2;
+
     easing.damp3(
       image.current.scale,
       [
@@ -32,8 +40,9 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
       0.1,
       dt
     );
+
     easing.dampC(
-      frame.current.material.color,
+      (frame.current.material as any).color,
       hovered && !isActive ? 'orange' : 'white',
       0.1,
       dt
@@ -91,6 +100,6 @@ function Frame({ url, c = new THREE.Color(), ...props }) {
       )}
     </group>
   );
-}
+};
 
 export default Frame;
