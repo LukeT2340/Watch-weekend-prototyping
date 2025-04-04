@@ -87,7 +87,7 @@ function Rig({
     );
 
     if (location === '/')
-      easing.damp3(state.camera.rotation, [-Math.PI / 6, 0, 0], 1, delta);
+      easing.damp3(state.camera.rotation, [-Math.PI / 5, 0, 0], 1, delta);
 
     easing.dampQ(state.camera.quaternion, q, 0.8, delta);
   });
