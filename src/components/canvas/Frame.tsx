@@ -9,7 +9,7 @@ import '../../js/utilities';
 
 const GOLDENRATIO = 1.61803398875;
 
-interface Props {
+interface Props extends THREE.Mesh {
   url: string;
   c: THREE.Color;
 }
